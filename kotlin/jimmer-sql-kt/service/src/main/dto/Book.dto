@@ -64,3 +64,8 @@ specification BookSpecification {
     }
 }
 
+FullNameView {
+    id
+    authorFullNames
+}
+

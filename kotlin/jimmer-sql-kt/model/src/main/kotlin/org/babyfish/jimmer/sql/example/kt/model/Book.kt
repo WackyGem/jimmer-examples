@@ -1,5 +1,6 @@
 package org.babyfish.jimmer.sql.example.kt.model
 
+import org.babyfish.jimmer.Formula
 import org.babyfish.jimmer.sql.*
 import org.babyfish.jimmer.sql.example.kt.model.common.BaseEntity
 import org.babyfish.jimmer.sql.example.kt.model.common.TenantAware
@@ -43,6 +44,11 @@ interface Book : BaseEntity, TenantAware {
     // If this property is deleted, please add `BookInputMapper.toAuthor(Long)`
     @IdView("authors") // ❻
     val authorIds: List<Long>
+
+    @Formula(dependencies = ["authors.firstName", "authors.lastName"])
+    val authorFullNames: List<String>
+        get() = authors.map { "${it.firstName} ${it.lastName}" }
+
 }
 
 /*----------------Documentation Links----------------
